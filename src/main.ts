@@ -17,4 +17,13 @@ image.height = 96;
 const message = document.createElement("p");
 message.textContent = "Your project starts here.";
 
-app.append(heading, image, message);
+const mineButton = document.createElement("button");
+mineButton.id = "mine-button";
+mineButton.textContent = "Mine";
+
+const mined = document.createElement("p");
+mineButton.addEventListener("click", () => {
+  mined.textContent = "Mined!";
+});
+
+app.append(heading, image, message, mineButton, mined);
