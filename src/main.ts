@@ -126,11 +126,11 @@ for (const pickaxe of pickaxes) {
   button.type = "button";
   button.className = "upgrade";
 
-  function refresh() {
+  const refresh = () => {
     button.textContent =
       `${pickaxe.name} - ${pickaxe.cost} - x${pickaxe.count} - +${pickaxe.rate}/sec`;
     button.disabled = cobblestoneCount < pickaxe.cost;
-  }
+  };
 
   button.addEventListener("click", () => {
     if (cobblestoneCount < pickaxe.cost) return; // cannot afford
