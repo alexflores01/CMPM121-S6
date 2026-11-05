@@ -21,7 +21,10 @@ const pickaxes: Pickaxe[] = [
 
 // Total cobblestone per second: summed owned x rate of every pickaxe.
 function totalRate(): number {
-  return pickaxes.reduce((sum, pickaxe) => sum + pickaxe.count * pickaxe.rate, 0);
+  return pickaxes.reduce(
+    (sum, pickaxe) => sum + pickaxe.count * pickaxe.rate,
+    0,
+  );
 }
 
 // Page layout: counter and per-second rate side by side at the top.
