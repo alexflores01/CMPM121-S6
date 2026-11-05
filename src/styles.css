@@ -1,0 +1,246 @@
+/* Cobblestone clicker — Minecraft theme, drawn entirely in CSS. */
+
+body {
+  margin: 0;
+  padding: 24px 16px 48px;
+  background-color: #fff;
+  color: #171310;
+  font-family: "Press Start 2P", "Courier New", monospace;
+}
+
+/* Contained layout, not full screen. */
+/* Contained layout: scene box is exactly 800px wide, left-aligned. */
+.game {
+  width: min(800px, 95vw);
+}
+
+.counter {
+  margin: 8px 0 24px;
+  font-size: 14px;
+  text-align: left;
+  color: #171310;
+}
+
+/* Single rounded scene box; hidden overflow clips the particles. */
+.scene {
+  position: relative;
+  width: min(800px, 95vw);
+  height: 450px;
+  overflow: hidden;
+  border: 4px solid #171310;
+  border-radius: 14px;
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35);
+  background: linear-gradient(#7ec8ff 0%, #a5d8ff 65%, #cdeaff 100%);
+}
+
+/* Square pixel sun. */
+.sun {
+  position: absolute;
+  top: 28px;
+  right: 36px;
+  width: 48px;
+  height: 48px;
+  background: #ffec8a;
+  box-shadow:
+    0 0 0 8px rgba(255, 236, 138, 0.35),
+    inset -8px -8px 0 rgba(255, 200, 60, 0.5);
+}
+
+/* Blocky clouds: little squares stepped out with box-shadow. */
+.cloud {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  opacity: 0.92;
+}
+
+.cloud-a {
+  top: 48px;
+  left: 48px;
+  box-shadow:
+    -16px 0 #fff,
+    16px 0 #fff,
+    32px 0 #fff,
+    48px 0 #fff,
+    16px -16px #fff,
+    32px -16px #fff;
+}
+
+.cloud-b {
+  top: 96px;
+  left: 288px;
+  box-shadow:
+    16px 0 #fff,
+    32px 0 #fff,
+    16px -16px #fff;
+}
+
+.cloud-c {
+  top: 168px;
+  left: 128px;
+  box-shadow:
+    16px 0 #fff,
+    32px 0 #fff;
+}
+
+/* Green grass strip, dirt layers below it. */
+.grass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 64px;
+  height: 32px;
+  border-top: 8px solid #66cc4e;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #58b73e 0 16px,
+    #4c9a33 16px 32px
+  );
+}
+
+.dirt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background-image: repeating-conic-gradient(
+    #7f5430 0% 25%,
+    #6b4425 25% 50%
+  );
+  background-size: 32px 32px;
+  box-shadow: inset 0 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Centers the block; particles spawn from its center. */
+.block-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Small counter directly above the block, inside the scene box. */
+.scene-counter {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 72px);
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border: 2px solid rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 10px;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+
+/* Large cobblestone block: gray square with darker pixel speckles. */
+.cobblestone {
+  width: 112px;
+  height: 112px;
+  padding: 0;
+  border: 4px solid #4d4d4d;
+  cursor: pointer;
+  background-color: #8f8f8f;
+  background-image:
+    linear-gradient(#606060 0 0),
+    linear-gradient(#606060 0 0),
+    linear-gradient(#6c6c6c 0 0),
+    linear-gradient(#565656 0 0),
+    linear-gradient(#6c6c6c 0 0),
+    repeating-conic-gradient(#9a9a9a 0% 25%, #8b8b8b 25% 50%);
+  background-size:
+    14px 14px,
+    10px 10px,
+    18px 18px,
+    12px 12px,
+    8px 8px,
+    16px 16px;
+  background-position:
+    20px 22px,
+    62px 12px,
+    38px 66px,
+    76px 44px,
+    26px 86px,
+    0 0;
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    repeat;
+  box-shadow:
+    inset 8px 8px 0 rgba(255, 255, 255, 0.22),
+    inset -8px -8px 0 rgba(0, 0, 0, 0.28),
+    0 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.cobblestone:hover {
+  filter: brightness(1.08);
+}
+
+.cobblestone:active {
+  filter: brightness(0.95);
+}
+
+/* Block-break animation: shake and scale down briefly. */
+.cobblestone.breaking {
+  animation: block-break 220ms linear;
+}
+
+@keyframes block-break {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(-4px, 1px) scale(0.96);
+  }
+  40% {
+    transform: translate(4px, -2px) scale(0.9);
+  }
+  60% {
+    transform: translate(-3px, 2px) scale(0.86);
+  }
+  80% {
+    transform: translate(2px, -1px) scale(0.94);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Small gray squares that fly outward and fade. */
+.particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  background: #7d7d7d;
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.3),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  animation: particle-fly 600ms ease-out forwards;
+}
+
+@keyframes particle-fly {
+  from {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
+/* Reserved room below the scene box for an upgrade list later. */
+.upgrades {
+  min-height: 160px;
+  margin-top: 32px;
+}
