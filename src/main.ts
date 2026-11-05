@@ -21,9 +21,13 @@ const mineButton = document.createElement("button");
 mineButton.id = "mine-button";
 mineButton.textContent = "Mine";
 
+let cobblestoneCount = 0;
+
 const mined = document.createElement("p");
+mined.textContent = `Cobblestone: ${cobblestoneCount}`;
 mineButton.addEventListener("click", () => {
-  mined.textContent = "Mined!";
+  cobblestoneCount += 1;
+  mined.textContent = `Cobblestone: ${cobblestoneCount}`;
 });
 
 app.append(heading, image, message, mineButton, mined);
